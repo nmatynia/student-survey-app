@@ -195,6 +195,33 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
         }
     }
 */
+    fun getAdmin(login: String): Admin{
+        var admin = Admin(-1,"","")
+        val db: SQLiteDatabase = this.readableDatabase
+        val sqlStatement = "SELECT * FROM $AdminTableName WHERE $AdminColumnLoginName = $login"
+        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+        if(cursor.moveToFirst()){
+            val id = cursor.getInt(0)
+            val login = cursor.getString(1)
+            val password = cursor.getString(2)
+            admin =  Admin(id,login,password)
+        }
+        return admin
+    }
+
+    fun getStudent(login: String): Student{
+        var student = Student(-1,"","")
+        val db: SQLiteDatabase = this.readableDatabase
+        val sqlStatement = "SELECT * FROM $StudentTableName WHERE $StudentColumnLoginName = $login"
+        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+        if(cursor.moveToFirst()){
+            val id = cursor.getInt(0)
+            val login = cursor.getString(1)
+            val password = cursor.getString(2)
+            student =  Student(id,login,password)
+        }
+        return student
+    }
 
     fun getAllSurveys(): ArrayList<Survey> {
 

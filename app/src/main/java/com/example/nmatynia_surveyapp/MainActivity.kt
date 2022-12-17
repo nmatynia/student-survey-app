@@ -20,26 +20,30 @@ class MainActivity : AppCompatActivity() {
 
     fun loginButton(view: View) {
 
-//        val userName = findViewById<EditText>(R.id.editTextUserName).text.toString()
-//        val userPassword = findViewById<EditText>(R.id.editTextPassword).text.toString()
-//
-//        if(userName.isEmpty() || userPassword.isEmpty())
-//            Toast.makeText(this,"Please insert both Login and Password",Toast.LENGTH_SHORT).show()
-//        else {
-//            val db = SurveyDataBase(this)
-//            val result = db.getUser(User(-1," ", " ",
-//                0, 0, " ", userName,userPassword))
-//            if( result == -1)
-//                Toast.makeText(this,"User not found.", Toast.LENGTH_SHORT).show()
-//            else if( result == -2)
-//                Toast.makeText(this,"Database error occurred.", Toast.LENGTH_SHORT).show()
-//            else {
-//                val intent = Intent(this, SurveyActivity::class.java)
-//                startActivity(intent)
-//                Toast.makeText(this,"You logged in successfully. ", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        val login = findViewById<EditText>(R.id.editTextUserName).text.toString()
+        val password = findViewById<EditText>(R.id.editTextPassword).text.toString()
+
+        if(login.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please insert both Login and Password", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val db = SurveyDataBase(this)
+        if(db.getAdmin(login).PassWord === password){
+            val intent = Intent(this, SurveyActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(this,"You logged in successfully as an Admin. ", Toast.LENGTH_SHORT).show()
+        }
+        else if(db.getStudent(login).PassWord === password){
+            val intent = Intent(this, SurveyActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(this,"You logged in successfully. ", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(this,"Incorrect credentials", Toast.LENGTH_SHORT).show()
+        }
     }
+
 
     fun registerButton(view: View) {
 
