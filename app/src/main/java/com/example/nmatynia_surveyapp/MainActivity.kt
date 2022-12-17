@@ -20,15 +20,14 @@ class MainActivity : AppCompatActivity() {
 
     fun loginButton(view: View) {
 
-//        val message = findViewById<TextView>(R.id.textViewMessage)
 //        val userName = findViewById<EditText>(R.id.editTextUserName).text.toString()
 //        val userPassword = findViewById<EditText>(R.id.editTextPassword).text.toString()
 //
 //        if(userName.isEmpty() || userPassword.isEmpty())
-//            Toast.makeText(this,"Please insert Username and Password",Toast.LENGTH_LONG).show()
+//            Toast.makeText(this,"Please insert both Login and Password",Toast.LENGTH_SHORT).show()
 //        else {
-//            val myDataBase = DataBaseHelper(this)
-//            val result = myDataBase.getUser(User(-1," ", " ",
+//            val db = SurveyDataBase(this)
+//            val result = db.getUser(User(-1," ", " ",
 //                0, 0, " ", userName,userPassword))
 //            if( result == -1)
 //                Toast.makeText(this,"User not found.", Toast.LENGTH_SHORT).show()
