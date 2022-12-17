@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center_horizontal"
+    >
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:text="Welcome to Admin Panel"
+        android:textSize="34sp"
+        android:layout_marginBottom="60dp"/>
+
+    <Button
+        android:id="@+id/buttonSurveyList"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:text="View survey list"
+        android:layout_marginBottom="30dp"
+        android:onClick="holder"/>
+
+    <Button
+        android:id="@+id/buttonEndedSurveyList"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:text="View ended surveys"
+        android:onClick="registerButton"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/buttonNewSurvey"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:text="Create new survey"
+        android:onClick="registerButton"
+        android:layout_marginBottom="30dp"/>
+
+
+</LinearLayout>
