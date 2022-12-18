@@ -3,6 +3,7 @@ package com.example.nmatynia_surveyapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -26,12 +27,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         val db = SurveyDataBase(this)
-        if(db.getAdmin(login).PassWord === password){
+        Log.d("Login",login)
+        Log.d("DB Id", db.getStudent(login).Id.toString())
+        if(db.getAdmin(login).PassWord == password){
             val intent = Intent(this, AdminActivity::class.java)
             startActivity(intent)
             Toast.makeText(this,"You logged in successfully as an Admin. ", Toast.LENGTH_LONG).show()
         }
-        else if(db.getStudent(login).PassWord === password){
+        else if(db.getStudent(login).PassWord == password){
             val intent = Intent(this, SurveyActivity::class.java)
             startActivity(intent)
             Toast.makeText(this,"You logged in successfully. ", Toast.LENGTH_LONG).show()
