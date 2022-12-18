@@ -133,22 +133,21 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
         TODO("Not yet implemented")
     }
-/*
-    fun addEmployee(employee: Employee): Boolean {
+
+    fun addStudent(student: Student): Boolean {
 
         // writableDatabase for insert actions
         val db: SQLiteDatabase = this.writableDatabase
         val cv: ContentValues = ContentValues()
 
-        cv.put(Column_EmployeeName, employee.name)
-        cv.put(Column_EmployeeAge, employee.age)
-        cv.put(Column_EmployeeIsActive, employee.isActive)
+        cv.put(StudentColumnLoginName, student.LoginName)
+        cv.put(StudentColumnPassWord, student.PassWord)
 
-        val success = db.insert(TableName, null, cv)
+        val success = db.insert(StudentTableName, null, cv)
         db.close()
         return success != -1L
     }
-
+/*
     fun deleteEmployee(employee: Employee): Boolean {
         // delete employee if exist in the database
         // writableDatabase for delete actions
@@ -198,7 +197,7 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
     fun getAdmin(login: String): Admin{
         var admin = Admin(-1,"","")
         val db: SQLiteDatabase = this.readableDatabase
-        val sqlStatement = "SELECT * FROM $AdminTableName WHERE $AdminColumnLoginName = $login"
+        val sqlStatement = "SELECT * FROM '$AdminTableName' WHERE '$AdminColumnLoginName' = '$login'"
         val cursor: Cursor = db.rawQuery(sqlStatement, null)
         if(cursor.moveToFirst()){
             val id = cursor.getInt(0)
@@ -212,7 +211,7 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
     fun getStudent(login: String): Student{
         var student = Student(-1,"","")
         val db: SQLiteDatabase = this.readableDatabase
-        val sqlStatement = "SELECT * FROM $StudentTableName WHERE $StudentColumnLoginName = $login"
+        val sqlStatement = "SELECT * FROM '$StudentTableName' WHERE '$StudentColumnLoginName' = '$login'"
         val cursor: Cursor = db.rawQuery(sqlStatement, null)
         if(cursor.moveToFirst()){
             val id = cursor.getInt(0)

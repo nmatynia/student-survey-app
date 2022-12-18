@@ -82,6 +82,6 @@
         android:id="@+id/buttonRegister"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Sign up"
         android:onClick="registerButton"/>
 </LinearLayout>

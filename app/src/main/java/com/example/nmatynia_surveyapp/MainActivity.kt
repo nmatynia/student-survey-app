@@ -5,11 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import com.example.nmatynia_surveyapp.Model.SurveyDataBase
-import com.example.nmatynia_surveyapp.Model.Admin
-import com.example.nmatynia_surveyapp.Model.Student
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,8 +43,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun registerButton(view: View) {
-
-//        val intent = Intent(this, MainActivityNewUser::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, SignUpActivity::class.java)
+        startActivity(intent)
     }
 }
