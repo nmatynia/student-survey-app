@@ -3,6 +3,7 @@ package com.example.nmatynia_surveyapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -24,7 +25,13 @@ class SignUpActivity : AppCompatActivity() {
             Toast.makeText(this, "Please fill in all inputs", Toast.LENGTH_LONG).show()
             return
         }
+
         val db = SurveyDataBase(this)
+        if(db.getAdmin(login).Id != -1 || db.getStudent(login).Id != -1){
+            Toast.makeText(this, "Entered username already exists", Toast.LENGTH_LONG).show()
+            return
+        }
+
         if(password == repeatedPassword){
             db.addStudent(Student(0,login,password))
             val intent = Intent(this, SurveyActivity::class.java)
