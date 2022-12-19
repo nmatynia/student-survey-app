@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         val db = SurveyDataBase(this)
-        Log.d("Login",login)
-        Log.d("DB Id", db.getStudent(login).Id.toString())
         if(db.getAdmin(login).PassWord == password){
             val intent = Intent(this, AdminActivity::class.java)
             startActivity(intent)

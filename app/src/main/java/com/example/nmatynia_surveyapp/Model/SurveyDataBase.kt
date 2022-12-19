@@ -197,7 +197,7 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
     fun getAdmin(login: String): Admin{
         var admin = Admin(-1,"","")
         val db: SQLiteDatabase = this.readableDatabase
-    val cursor: Cursor = db.rawQuery("SELECT * FROM $AdminTableName WHERE $AdminColumnLoginName = ?", arrayOf(login))
+        val cursor: Cursor = db.rawQuery("SELECT * FROM $AdminTableName WHERE $AdminColumnLoginName = ?", arrayOf(login))
         if(cursor.moveToFirst()){
             val id = cursor.getInt(0)
             val login = cursor.getString(1)
@@ -221,7 +221,6 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
     }
 
     fun getAllSurveys(): ArrayList<Survey> {
-
         val surveyList = ArrayList<Survey>()
         val db: SQLiteDatabase = this.readableDatabase
 
@@ -229,13 +228,14 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
 
         val cursor: Cursor = db.rawQuery(sqlStatement, null)
 
-        if (cursor.moveToFirst())
+        if (cursor.moveToFirst()) {
             do {
                 val id: Int = cursor.getInt(0)
                 val title: String = cursor.getString(1)
                 val survey = Survey(id, title)
                 surveyList.add(survey)
             } while (cursor.moveToNext())
+        }
 
         cursor.close()
         db.close()
