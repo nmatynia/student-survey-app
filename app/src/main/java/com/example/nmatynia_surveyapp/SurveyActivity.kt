@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.TextView
+import androidx.core.view.isVisible
 import com.example.nmatynia_surveyapp.Model.SurveyDataBase
 
 class SurveyActivity : AppCompatActivity() {
@@ -20,6 +22,9 @@ class SurveyActivity : AppCompatActivity() {
         simpleList = findViewById(R.id.surveyListView)
         val arrayAdapter =
             ArrayAdapter(this,R.layout.activity_survey_list_view,R.id.surveyListItem,surveyTitles )
+        if(surveyList.isEmpty()){
+            findViewById<TextView>(R.id.noSurveys).isVisible = true
+        }
         simpleList?.adapter = arrayAdapter
     }
 }

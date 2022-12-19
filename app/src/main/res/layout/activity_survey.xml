@@ -19,6 +19,16 @@
             android:textAlignment="center"
             android:textSize="34sp" />
 
+        <TextView
+            android:id="@+id/noSurveys"
+            android:layout_width="match_parent"
+            android:layout_height="401dp"
+            android:gravity="center"
+            android:text="No available surveys at the moment"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
         <ListView
             android:id="@+id/surveyListView"
             android:divider="@color/black"
