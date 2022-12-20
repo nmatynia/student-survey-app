@@ -43,5 +43,14 @@
         android:onClick="goToNewSurvey"
         android:layout_marginBottom="30dp"/>
 
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:onClick="logout"
+        android:backgroundTint="#251351"
+        android:layout_marginTop="120dp"/>
+
 
 </LinearLayout>

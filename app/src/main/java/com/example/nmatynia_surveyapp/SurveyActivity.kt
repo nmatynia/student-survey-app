@@ -1,8 +1,10 @@
 package com.example.nmatynia_surveyapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
@@ -26,5 +28,10 @@ class SurveyActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.noSurveys).isVisible = true
         }
         simpleList?.adapter = arrayAdapter
+    }
+
+    fun logout(view: View){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }
