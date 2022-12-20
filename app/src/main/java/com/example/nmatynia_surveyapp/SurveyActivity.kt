@@ -22,8 +22,14 @@ class SurveyActivity : AppCompatActivity() {
         var surveyList =  db.getAllSurveys()
         var surveyTitles = surveyList.map{it.Title}
         simpleList = findViewById(R.id.surveyListView)
+
+        simpleList?.setOnItemClickListener { parent, view, position, id ->
+            val surveyId = surveyList[position].Id
+            // Do something with the surveyId here
+        }
+
         val arrayAdapter =
-            ArrayAdapter(this,R.layout.activity_survey_list_view,R.id.surveyListItem,surveyTitles )
+            ArrayAdapter(this,R.layout.activity_survey_list_view,R.id.surveyListItem,surveyTitles)
         if(surveyList.isEmpty()){
             findViewById<TextView>(R.id.noSurveys).isVisible = true
         }
