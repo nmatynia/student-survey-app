@@ -64,6 +64,7 @@
                 android:textSize="20sp" />
 
             <DatePicker
+                android:id="@+id/pickerStartDate"
                 android:layout_width="328dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -85,6 +86,7 @@
                 android:textSize="20sp" />
 
             <DatePicker
+                android:id="@+id/pickerEndDate"
                 android:layout_width="328dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -92,6 +94,7 @@
                 android:datePickerMode="spinner" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/questionList"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="30dp"
@@ -114,14 +117,22 @@
                     android:hint="Question 1"
                     android:inputType="textMultiLine"
                     android:textSize="20sp"
-                    android:layout_marginVertical="30dp"/>
+                    android:layout_marginTop="30dp"/>
         </LinearLayout>
         <Button
             android:id="@+id/buttonNewSurvey"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:text="Add new questions"
-            android:onClick="goToNewSurvey"
+            android:onClick="addNewQuestion"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/buttonSubmitNewSurvey"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:text="Submit Survey"
+            android:onClick="submitSurvey"
+            android:backgroundTint="#251351"
             android:layout_marginBottom="30dp"/>
 
     </LinearLayout>
