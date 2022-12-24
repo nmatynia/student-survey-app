@@ -2,11 +2,14 @@ package com.example.nmatynia_surveyapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nmatynia_surveyapp.Model.CustomAdapter
 import com.example.nmatynia_surveyapp.Model.SurveyDataBase
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AdminSurveyActivity : AppCompatActivity() {
@@ -20,15 +23,22 @@ class AdminSurveyActivity : AppCompatActivity() {
         publishedSurveyList = findViewById<ListView>(R.id.publishedSurveysList)
 
         val db = SurveyDataBase(this)
+        val today = Calendar.getInstance().time
 
         val publishedSurveys = db.getAllPublishedSurveys()
 
+        val filteredSurveys = publishedSurveys.filter { survey ->
+            val surveyDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.EndDate)
+            Log.d("marcin",surveyDate.toString())
+            surveyDate.after(today)
+        }
+
         publishedSurveyList?.setOnItemClickListener { parent, view, position, id ->
-            val publishedSurveyId = publishedSurveys[position].Id
-            val surveyId = publishedSurveys[position].SurveyId
+            val publishedSurveyId = filteredSurveys[position].Id
+            val surveyId = filteredSurveys[position].SurveyId
             val surveyTitle = db.getSurvey(surveyId).Title
-            val surveyStartDate = publishedSurveys[position].StartDate
-            val surveyEndDate = publishedSurveys[position].EndDate
+            val surveyStartDate = filteredSurveys[position].StartDate
+            val surveyEndDate = filteredSurveys[position].EndDate
             val intent = Intent(baseContext, EditSurveyActivity::class.java)
 
             intent.putExtra("ID", publishedSurveyId)
@@ -38,9 +48,9 @@ class AdminSurveyActivity : AppCompatActivity() {
             intent.putExtra("END_DATE", surveyEndDate)
             startActivity(intent)
         }
-        val surveyNames = publishedSurveys.map{db.getSurvey(it.SurveyId).Title}.toTypedArray()
-        val surveyStartDates = publishedSurveys.map{it.StartDate}.toTypedArray()
-        val surveyEndDates = publishedSurveys.map{it.EndDate}.toTypedArray()
+        val surveyNames = filteredSurveys.map{db.getSurvey(it.SurveyId).Title}.toTypedArray()
+        val surveyStartDates = filteredSurveys.map{it.StartDate}.toTypedArray()
+        val surveyEndDates = filteredSurveys.map{it.EndDate}.toTypedArray()
 
         val adapter = CustomAdapter(applicationContext, surveyNames, surveyStartDates, surveyEndDates)
 
