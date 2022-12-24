@@ -2,6 +2,7 @@ package com.example.nmatynia_surveyapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nmatynia_surveyapp.Model.CustomAdapter
@@ -26,8 +27,8 @@ class AdminSurveyActivity : AppCompatActivity() {
             val publishedSurveyId = publishedSurveys[position].Id
             val surveyId = publishedSurveys[position].SurveyId
             val surveyTitle = db.getSurvey(surveyId).Title
-            val surveyStartDate = publishedSurveys[position].EndDate
-            val surveyEndDate = publishedSurveys[position].StartDate
+            val surveyStartDate = publishedSurveys[position].StartDate
+            val surveyEndDate = publishedSurveys[position].EndDate
             val intent = Intent(baseContext, EditSurveyActivity::class.java)
 
             intent.putExtra("ID", publishedSurveyId)
@@ -45,4 +46,11 @@ class AdminSurveyActivity : AppCompatActivity() {
 
         publishedSurveyList!!.adapter = adapter
     }
+
+    fun goBack(view: View){
+        val intent = Intent(this, AdminActivity::class.java)
+        startActivity(intent)
+    }
+
+
 }

@@ -267,6 +267,33 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
         return rowId
     }
 
+    fun updateSurvey(survey: Survey): Boolean {
+
+        // writableDatabase for insert actions
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
+
+        cv.put(SurveyColumnTitle, survey.Title)
+
+        val result = db.update(SurveyTableName, cv, "$SurveyColumnId =  ${survey.Id}", null) == 1
+        db.close()
+        return result
+    }
+
+    fun updatePublishedSurvey(publishedSurvey: PublishedSurvey): Boolean {
+
+        // writableDatabase for insert actions
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
+
+        cv.put(PublishedSurveyColumnStartDate, publishedSurvey.StartDate)
+        cv.put(PublishedSurveyColumnEndDate, publishedSurvey.EndDate)
+
+        val result = db.update(PublishedSurveyTableName, cv, "$PublishedSurveyColumnId =  ${publishedSurvey.Id}", null) == 1
+        db.close()
+        return result
+    }
+
     fun addQuestion(question: Question): Long {
         // writableDatabase for insert actions
         val db: SQLiteDatabase = this.writableDatabase

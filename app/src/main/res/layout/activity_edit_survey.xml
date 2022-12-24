@@ -75,7 +75,15 @@
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:text="Submit Changes"
-            android:onClick="submitSurvey"
+            android:onClick="submitSurveyChanges"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/buttonGoBack"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:onClick="goBack"
+            android:backgroundTint="#251351"
             android:layout_marginBottom="30dp"/>
 
     </LinearLayout>

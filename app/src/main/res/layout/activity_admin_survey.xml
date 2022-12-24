@@ -51,8 +51,17 @@
             android:textStyle="bold"
             android:textSize="15sp" />
     </LinearLayout>
+
     <ListView
         android:id="@+id/publishedSurveysList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="284dp" />
+    <Button
+        android:id="@+id/buttonGoBack"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:onClick="goBack"
+        android:backgroundTint="#251351"
+        android:layout_marginBottom="30dp"/>
 </LinearLayout>
