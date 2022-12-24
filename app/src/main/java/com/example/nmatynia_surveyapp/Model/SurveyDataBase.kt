@@ -204,6 +204,8 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
             val password = cursor.getString(2)
             admin =  Admin(id,login,password)
         }
+        cursor.close()
+        db.close()
         return admin
     }
 
@@ -217,7 +219,25 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
             val password = cursor.getString(2)
             student =  Student(id,login,password)
         }
+        cursor.close()
+        db.close()
         return student
+    }
+
+    fun getSurvey(id: Int): Survey{
+        var survey = Survey(-1, "");
+        val db: SQLiteDatabase = this.readableDatabase
+        val cursor: Cursor = db.rawQuery("SELECT * FROM $SurveyTableName WHERE $SurveyColumnId = ?", arrayOf(id.toString()))
+        if(cursor.moveToFirst()){
+            val id = cursor.getInt(0)
+            val title = cursor.getString(1)
+            survey =  Survey(id,title)
+        }
+        cursor.close()
+        db.close()
+        return survey
+
+
     }
 
     fun addSurvey(survey: Survey): Long {
@@ -282,6 +302,8 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
 
         return surveyList
     }
+
+
 
     fun getAllPublishedSurveys(): ArrayList<PublishedSurvey> {
         val publishedSurveyList = ArrayList<PublishedSurvey>()

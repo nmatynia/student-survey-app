@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="View survey list"
         android:layout_marginBottom="30dp"
-        android:onClick="holder"/>
+        android:onClick="goToExistingSurveys"/>
 
     <Button
         android:id="@+id/buttonEndedSurveyList"
