@@ -99,4 +99,9 @@ class NewSurveyActivity : AppCompatActivity() {
         val intent = Intent(this, AdminActivity::class.java)
         startActivity(intent)
     }
+
+    fun goBack(view: View){
+        val intent = Intent(this, AdminActivity::class.java)
+        startActivity(intent)
+    }
 }

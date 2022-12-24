@@ -123,15 +123,22 @@
             android:id="@+id/buttonNewSurvey"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
-            android:text="Add new questions"
+            android:text="+ Add new questions"
             android:onClick="addNewQuestion"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="60dp"/>
         <Button
             android:id="@+id/buttonSubmitNewSurvey"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:text="Submit Survey"
             android:onClick="submitSurvey"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/buttonGoBack"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:onClick="goBack"
             android:backgroundTint="#251351"
             android:layout_marginBottom="30dp"/>
 
