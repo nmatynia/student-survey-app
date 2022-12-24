@@ -283,6 +283,31 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
         return surveyList
     }
 
+    fun getAllPublishedSurveys(): ArrayList<PublishedSurvey> {
+        val publishedSurveyList = ArrayList<PublishedSurvey>()
+        val db: SQLiteDatabase = this.readableDatabase
+
+        val sqlStatement = "SELECT * FROM $PublishedSurveyTableName"
+
+        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id: Int = cursor.getInt(0)
+                val surveyId: Int = cursor.getInt(1)
+                val startDate: String = cursor.getString(2)
+                val endDate: String = cursor.getString(3)
+                val publishedSurvey = PublishedSurvey(id, surveyId,startDate,endDate)
+                publishedSurveyList.add(publishedSurvey)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return publishedSurveyList
+    }
+
     fun getAllQuestions(surveyId: Int): ArrayList<Question> {
 
         val questionList = ArrayList<Question>()
