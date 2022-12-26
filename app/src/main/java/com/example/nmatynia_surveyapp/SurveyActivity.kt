@@ -9,31 +9,52 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.core.view.isVisible
+import com.example.nmatynia_surveyapp.Model.CustomAdapter
 import com.example.nmatynia_surveyapp.Model.SurveyDataBase
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SurveyActivity : AppCompatActivity() {
-    var simpleList: ListView? = null
+    lateinit var publishedSurveyList: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_survey)
+        publishedSurveyList = findViewById<ListView>(R.id.publishedSurveysList)
+
         val db = SurveyDataBase(this)
+        val today = Calendar.getInstance().time
 
-        var surveyList =  db.getAllSurveys()
-        var surveyTitles = surveyList.map{it.Title}
-        simpleList = findViewById(R.id.surveyListView)
+        val publishedSurveys = db.getAllPublishedSurveys()
 
-        simpleList?.setOnItemClickListener { parent, view, position, id ->
-            val surveyId = surveyList[position].Id
-            // Do something with the surveyId here
+        val filteredSurveys = publishedSurveys.filter { survey ->
+            val surveyDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.EndDate)
+            Log.d("marcin",surveyDate.toString())
+            surveyDate.after(today)
         }
 
-        val arrayAdapter =
-            ArrayAdapter(this,R.layout.activity_survey_list_view,R.id.surveyListItem,surveyTitles)
-        if(surveyList.isEmpty()){
-            findViewById<TextView>(R.id.noSurveys).isVisible = true
+        publishedSurveyList?.setOnItemClickListener { parent, view, position, id ->
+            val publishedSurveyId = filteredSurveys[position].Id
+            val surveyId = filteredSurveys[position].SurveyId
+            val surveyTitle = db.getSurvey(surveyId).Title
+            val surveyStartDate = filteredSurveys[position].StartDate
+            val surveyEndDate = filteredSurveys[position].EndDate
+            val intent = Intent(baseContext, QuestionsActivity::class.java)
+
+            intent.putExtra("ID", publishedSurveyId)
+            intent.putExtra("SURVEY_ID", surveyId)
+            intent.putExtra("TITLE", surveyTitle)
+            intent.putExtra("START_DATE", surveyStartDate)
+            intent.putExtra("END_DATE", surveyEndDate)
+            startActivity(intent)
         }
-        simpleList?.adapter = arrayAdapter
+        val surveyNames = filteredSurveys.map{db.getSurvey(it.SurveyId).Title}.toTypedArray()
+        val surveyStartDates = filteredSurveys.map{it.StartDate}.toTypedArray()
+        val surveyEndDates = filteredSurveys.map{it.EndDate}.toTypedArray()
+
+        val adapter = CustomAdapter(applicationContext, surveyNames, surveyStartDates, surveyEndDates)
+
+        publishedSurveyList!!.adapter = adapter
     }
 
     fun logout(view: View){
