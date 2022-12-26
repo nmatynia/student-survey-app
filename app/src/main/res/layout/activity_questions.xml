@@ -24,28 +24,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:text="Choose Survey"
-        android:textSize="16sp"
+        android:text="Question content"
+        android:textSize="18dp"
         android:layout_marginBottom="30dp"/>
 
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="273dp">
+        android:layout_height="273dp"
+        >
 
         <RadioButton
             android:id="@+id/buttonStronglyAgree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
             android:text="Strongly Agree" />
 
         <RadioButton
             android:id="@+id/buttonAgree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Agree" />
+            android:text="Agree"
+            android:textSize="18dp"
+            />
 
         <RadioButton
+            android:textSize="18dp"
             android:id="@+id/buttonNor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,13 +60,17 @@
             android:id="@+id/buttonDisagree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Disagree" />
+            android:text="Disagree"
+            android:textSize="18dp"
+            />
 
         <RadioButton
             android:id="@+id/buttonStronglyDisagree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Strongly Disagree" />
+            android:text="Strongly Disagree"
+            android:textSize="18dp"
+            />
     </RadioGroup>
 
     <LinearLayout
@@ -75,17 +84,17 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="30dp"
             android:layout_weight=".50"
-            android:onClick="logout"
+            android:onClick="previous"
             android:text="Previous" />
 
         <Button
-            android:id="@+id/buttonLogout"
+            android:id="@+id/buttonNext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="30dp"
             android:layout_weight=".50"
-            android:onClick="logout"
+            android:onClick="next"
             android:text="Next" />
     </LinearLayout>
 
