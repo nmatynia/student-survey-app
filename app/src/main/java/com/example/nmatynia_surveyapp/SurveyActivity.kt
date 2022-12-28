@@ -28,9 +28,10 @@ class SurveyActivity : AppCompatActivity() {
         val publishedSurveys = db.getAllPublishedSurveys()
 
         val filteredSurveys = publishedSurveys.filter { survey ->
-            val surveyDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.EndDate)
-            Log.d("marcin",surveyDate.toString())
-            surveyDate.after(today)
+            val surveyEndDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.EndDate)
+            val surveyStartDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.StartDate)
+            surveyEndDate.after(today) && !surveyStartDate.after(today)
+
         }
 
         publishedSurveyList?.setOnItemClickListener { parent, view, position, id ->

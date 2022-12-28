@@ -77,7 +77,7 @@ class QuestionsActivity : AppCompatActivity() {
         if (selectedId == -1) {
             Toast.makeText(
                 this,
-                "You must select your answer before going to the next question",
+                "You must select your answer before advancing",
                 Toast.LENGTH_LONG
             ).show()
             return
