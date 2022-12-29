@@ -37,7 +37,7 @@ class AdminEndedSurveyActivity : AppCompatActivity() {
             val surveyTitle = db.getSurvey(surveyId).Title
             val surveyStartDate = filteredSurveys[position].StartDate
             val surveyEndDate = filteredSurveys[position].EndDate
-            val intent = Intent(baseContext, EditSurveyActivity::class.java)
+            val intent = Intent(baseContext, EndedSurveyStatsActivity::class.java)
 
             intent.putExtra("ID", publishedSurveyId)
             intent.putExtra("SURVEY_ID", surveyId)

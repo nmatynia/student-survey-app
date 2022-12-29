@@ -1,10 +1,9 @@
 package com.example.nmatynia_surveyapp
 
 import android.content.Intent
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ListView
 import com.example.nmatynia_surveyapp.Model.*
@@ -22,11 +21,13 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
         val db = SurveyDataBase(this)
 
         val studentSurveyRespondList = db.getStudentSurveyResponds(publishedSurveyId);
+        Log.d("de1",studentSurveyRespondList.toString())
         val uniqueQuestionAnswerList = ArrayList<QuestionAnswerSurveyRespond>()
         studentSurveyRespondList.forEach { respond ->
-            if(!uniqueQuestionAnswerList.any{it.StudentId == respond.StudentId}){
-                val question = db.getQuestion(respond.QuestionId)
+            val question = db.getQuestion(respond.QuestionId)
+            if(!uniqueQuestionAnswerList.any{it.StudentId == respond.StudentId && it.Question == question.QuestionText}){
                 val answer = db.getAnswer(respond.AnswerId)
+                Log.d("answer",answer.toString())
                 uniqueQuestionAnswerList.add(
                     QuestionAnswerSurveyRespond(respond.StudentId,
                         question.QuestionText,
@@ -34,6 +35,8 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
                 )
             }
         }
+        Log.d("de2",uniqueQuestionAnswerList.toString())
+
         val uniqueResponds = uniqueQuestionAnswerList.size //TODO
 
         val surveyResponseTable = ArrayList<SurveyResponseRow>()
@@ -50,7 +53,7 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
                 when (answer) {
                     "Strongly Disagree" -> newRow.stronglyDisagree++
                     "Disagree" -> newRow.disagree++
-                    "Agree nor Disagree" -> newRow.agreeNorDisagree++
+                    "Neither Agree nor Disagree" -> newRow.agreeNorDisagree++
                     "Agree" -> newRow.agree++
                     "Strongly Agree" -> newRow.stronglyAgree++
                 }
@@ -61,14 +64,14 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
                 when (answer) {
                     "Strongly Disagree" -> existingRow.stronglyDisagree++
                     "Disagree" -> existingRow.disagree++
-                    "Agree nor Disagree" -> existingRow.agreeNorDisagree++
+                    "Neither Agree nor Disagree" -> existingRow.agreeNorDisagree++
                     "Agree" -> existingRow.agree++
                     "Strongly Agree" -> existingRow.stronglyAgree++
                 }
                 existingRow.total++
             }
         }
-
+        val questionList: ArrayList<String> = surveyResponseTable.map {it.question} as ArrayList<String>
         val stronglyDisagreeList: ArrayList<String> = surveyResponseTable.map {
             if (it.total == 0) {
                 "0%"
@@ -109,7 +112,7 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
             }
         }.toCollection(ArrayList())
 
-        val adapter = SurveyStatsAdapter(applicationContext, studentSurveyRespondList, stronglyDisagreeList, surveyEndDates)
+        val adapter = SurveyStatsAdapter(applicationContext, questionList, stronglyDisagreeList, disagreeList, norList, agreeList, stronglyAgreeList)
 
         endedSurveyList!!.adapter = adapter
     }

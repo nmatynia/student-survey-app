@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="20dp"
         >
 
         <TextView
@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/resSD"
-            android:layout_width="30dp"
+            android:layout_width="37dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="12dp"
             android:gravity="center_vertical"
@@ -36,7 +36,7 @@
             android:textSize="15sp" />
         <TextView
             android:id="@+id/resD"
-            android:layout_width="30dp"
+            android:layout_width="37dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="12dp"
             android:gravity="center_vertical"
@@ -45,7 +45,7 @@
             android:textSize="15sp" />
         <TextView
             android:id="@+id/resNor"
-            android:layout_width="30dp"
+            android:layout_width="37dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="12dp"
             android:gravity="center_vertical"
@@ -54,20 +54,20 @@
             android:textSize="15sp" />
         <TextView
             android:id="@+id/resA"
-            android:layout_width="30dp"
+            android:layout_width="37dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="12dp"
             android:gravity="center_vertical"
-            android:text="A"
+            android:text="100%"
             android:textStyle="bold"
             android:textSize="15sp" />
         <TextView
             android:id="@+id/resSA"
-            android:layout_width="30dp"
+            android:layout_width="37dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="12dp"
             android:gravity="center_vertical"
-            android:text="SA"
+            android:text="100%"
             android:textStyle="bold"
             android:textSize="15sp" />
     </LinearLayout>

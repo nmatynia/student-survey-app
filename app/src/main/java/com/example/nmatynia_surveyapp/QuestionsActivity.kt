@@ -74,6 +74,7 @@ class QuestionsActivity : AppCompatActivity() {
         val radioGroup = findViewById<RadioGroup>(R.id.answerGroup)
         val selectedId = radioGroup.checkedRadioButtonId
 
+
         if (selectedId == -1) {
             Toast.makeText(
                 this,
@@ -82,7 +83,12 @@ class QuestionsActivity : AppCompatActivity() {
             ).show()
             return
         }
+
+        val radioButton = findViewById<RadioButton>(selectedId)
+        val selectedValue = radioButton.text
+
         if (index == questions.size - 1) {
+            answer[index] = (selectedValue.toString())
             submit()
             return
         }
@@ -92,8 +98,7 @@ class QuestionsActivity : AppCompatActivity() {
             nextButton.setBackgroundColor(Color.parseColor("#251351"))
         }
 
-        val radioButton = findViewById<RadioButton>(selectedId)
-        val selectedValue = radioButton.text
+
         answer[index] = (selectedValue.toString())
         Log.d("marcin", answer.toString())
         index++;

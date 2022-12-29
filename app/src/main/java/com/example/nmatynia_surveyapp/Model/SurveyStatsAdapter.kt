@@ -10,12 +10,12 @@ import android.widget.TextView
 
 class SurveyStatsAdapter(
     private val appContext: Context,
-    private val questionContentList:Array<String>,
-    private val resSDPrecentageList:Array<String>,
-    private val resDPrecentageList:Array<String>,
-    private val resNorPrecentageList:Array<String>,
-    private val resAPrecentageList:Array<String>,
-    private val resSAPrecentageList:Array<String>): BaseAdapter() {
+    private val questionContentList: ArrayList<String>,
+    private val resSDPrecentageList: ArrayList<String>,
+    private val resDPrecentageList: ArrayList<String>,
+    private val resNorPrecentageList: ArrayList<String>,
+    private val resAPrecentageList: ArrayList<String>,
+    private val resSAPrecentageList: ArrayList<String>): BaseAdapter() {
 
     private val inflater:LayoutInflater
             = appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -34,7 +34,7 @@ class SurveyStatsAdapter(
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
         var view: View? = view
-        view = inflater.inflate(R.layout.published_survey_item, parent, false)
+        view = inflater.inflate(R.layout.ended_survey_item, parent, false)
 
         val questionContent = view.findViewById<TextView>(R.id.questionContent)
         val stronglyAgree = view.findViewById<TextView>(R.id.resSA)
