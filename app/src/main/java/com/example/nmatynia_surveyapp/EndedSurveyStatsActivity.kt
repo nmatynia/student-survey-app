@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ListView
+import android.widget.TextView
 import com.example.nmatynia_surveyapp.Model.*
 import kotlin.math.roundToInt
 
@@ -21,23 +22,27 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
         val db = SurveyDataBase(this)
 
         val studentSurveyRespondList = db.getStudentSurveyResponds(publishedSurveyId);
-        Log.d("de1",studentSurveyRespondList.toString())
+
         val uniqueQuestionAnswerList = ArrayList<QuestionAnswerSurveyRespond>()
+        val uniqueStudents = ArrayList<Int>()
         studentSurveyRespondList.forEach { respond ->
             val question = db.getQuestion(respond.QuestionId)
             if(!uniqueQuestionAnswerList.any{it.StudentId == respond.StudentId && it.Question == question.QuestionText}){
                 val answer = db.getAnswer(respond.AnswerId)
-                Log.d("answer",answer.toString())
                 uniqueQuestionAnswerList.add(
                     QuestionAnswerSurveyRespond(respond.StudentId,
                         question.QuestionText,
                         answer.AnswerText)
                 )
             }
+            if(!uniqueStudents.any{it == respond.StudentId}){
+                    uniqueStudents.add(respond.StudentId)
+            }
         }
-        Log.d("de2",uniqueQuestionAnswerList.toString())
 
-        val uniqueResponds = uniqueQuestionAnswerList.size //TODO
+        val uniqueResponds = uniqueStudents.size
+        findViewById<TextView>(R.id.totalResponds).text = uniqueResponds.toString()
+
 
         val surveyResponseTable = ArrayList<SurveyResponseRow>()
 
@@ -117,8 +122,8 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
         endedSurveyList!!.adapter = adapter
     }
 
-    fun logout(view: View){
-        val intent = Intent(this, MainActivity::class.java)
+    fun goBack(view: View){
+        val intent = Intent(this, AdminEndedSurveyActivity::class.java)
         startActivity(intent)
     }
 
