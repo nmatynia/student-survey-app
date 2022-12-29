@@ -6,18 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SurveyActivity"
+    tools:context=".AdminEndedSurveyActivity"
     android:gravity="center_horizontal">
-
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="146dp"
+        android:layout_height="120dp"
         android:gravity="center"
-        android:text="Choose Survey"
-        android:textAlignment="center"
-        android:textSize="34sp" />
-
+        android:text="Expired surveys"
+        android:textSize="34sp"
+        android:layout_marginBottom="60dp"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -59,12 +57,11 @@
         android:layout_width="match_parent"
         android:layout_height="284dp" />
     <Button
-        android:id="@+id/buttonLogout"
+        android:id="@+id/buttonGoBack"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:onClick="logout"
+        android:text="Back"
+        android:onClick="goBack"
         android:backgroundTint="#251351"
         android:layout_marginBottom="30dp"/>
-
 </LinearLayout>

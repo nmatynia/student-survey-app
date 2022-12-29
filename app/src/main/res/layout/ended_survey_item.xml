@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SurveyActivity"
+    android:gravity="center_horizontal"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        >
+
+        <TextView
+            android:id="@+id/questionContent"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="Question"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/resSD"
+            android:layout_width="37dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="12dp"
+            android:gravity="center_vertical"
+            android:text="SD"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/resD"
+            android:layout_width="37dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="12dp"
+            android:gravity="center_vertical"
+            android:text="D"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/resNor"
+            android:layout_width="37dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="12dp"
+            android:gravity="center_vertical"
+            android:text="Nor"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/resA"
+            android:layout_width="37dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="12dp"
+            android:gravity="center_vertical"
+            android:text="100%"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/resSA"
+            android:layout_width="37dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="12dp"
+            android:gravity="center_vertical"
+            android:text="100%"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+    </LinearLayout>
+</LinearLayout>

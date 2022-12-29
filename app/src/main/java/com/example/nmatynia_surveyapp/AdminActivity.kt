@@ -20,6 +20,11 @@ class AdminActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun goToEndedSurveys(view: View){
+        val intent = Intent(this, AdminEndedSurveyActivity::class.java)
+        startActivity(intent)
+    }
+
     fun logout(view: View){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

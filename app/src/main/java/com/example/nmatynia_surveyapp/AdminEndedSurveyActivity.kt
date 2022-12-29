@@ -1,25 +1,24 @@
 package com.example.nmatynia_surveyapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.TextView
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nmatynia_surveyapp.Model.CustomAdapter
 import com.example.nmatynia_surveyapp.Model.SurveyDataBase
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SurveyActivity : AppCompatActivity() {
+
+class AdminEndedSurveyActivity : AppCompatActivity() {
     lateinit var publishedSurveyList: ListView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_survey)
+        setContentView(R.layout.activity_admin_ended_survey)
+
         publishedSurveyList = findViewById<ListView>(R.id.publishedSurveysList)
 
         val db = SurveyDataBase(this)
@@ -28,10 +27,8 @@ class SurveyActivity : AppCompatActivity() {
         val publishedSurveys = db.getAllPublishedSurveys()
 
         val filteredSurveys = publishedSurveys.filter { survey ->
-            val surveyEndDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.EndDate)
-            val surveyStartDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.StartDate)
-            surveyEndDate.after(today) && !surveyStartDate.after(today)
-
+            val surveyDate = SimpleDateFormat("dd/MM/yyyy").parse(survey.EndDate)
+            surveyDate.before(today)
         }
 
         publishedSurveyList?.setOnItemClickListener { parent, view, position, id ->
@@ -40,7 +37,7 @@ class SurveyActivity : AppCompatActivity() {
             val surveyTitle = db.getSurvey(surveyId).Title
             val surveyStartDate = filteredSurveys[position].StartDate
             val surveyEndDate = filteredSurveys[position].EndDate
-            val intent = Intent(baseContext, QuestionsActivity::class.java)
+            val intent = Intent(baseContext, EndedSurveyStatsActivity::class.java)
 
             intent.putExtra("ID", publishedSurveyId)
             intent.putExtra("SURVEY_ID", surveyId)
@@ -58,8 +55,10 @@ class SurveyActivity : AppCompatActivity() {
         publishedSurveyList!!.adapter = adapter
     }
 
-    fun logout(view: View){
-        val intent = Intent(this, MainActivity::class.java)
+    fun goBack(view: View){
+        val intent = Intent(this, AdminActivity::class.java)
         startActivity(intent)
     }
+
+
 }

@@ -147,53 +147,7 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
         db.close()
         return success != -1L
     }
-/*
-    fun deleteEmployee(employee: Employee): Boolean {
-        // delete employee if exist in the database
-        // writableDatabase for delete actions
-        val db: SQLiteDatabase = this.writableDatabase
 
-        val result = db.delete(TableName, "$Column_ID = ${employee.id}", null) == 1
-
-        db.close()
-        return result
-    }
-
-    fun updateEmployee(employee: Employee): Boolean {
-
-        // writableDatabase for insert actions
-        val db: SQLiteDatabase = this.writableDatabase
-        val cv: ContentValues = ContentValues()
-
-        cv.put(Column_EmployeeName, employee.name)
-        cv.put(Column_EmployeeAge, employee.age)
-        cv.put(Column_EmployeeIsActive, employee.isActive)
-
-        val result = db.update(TableName, cv, "$Column_ID =  ${employee.id}", null) == 1
-        db.close()
-        return result
-    }
-
-    fun getEmployee(eID: Int): Employee {
-        val db: SQLiteDatabase = this.readableDatabase
-        val sqlStatement = "SELECT * FROM $TableName WHERE $Column_ID = $eID"
-
-        val cursor: Cursor = db.rawQuery(sqlStatement, null)
-        if (cursor.moveToFirst()) {
-            // The ID is found
-            db.close()
-            return Employee(
-                cursor.getInt(0),
-                cursor.getString(1),
-                cursor.getInt(2),
-                cursor.getInt(3) == 1
-            )
-        } else {
-            db.close()
-            return Employee(0, "Employee not exist", 0, false) // not found
-        }
-    }
-*/
     fun getAdmin(login: String): Admin{
         var admin = Admin(-1,"","")
         val db: SQLiteDatabase = this.readableDatabase
@@ -263,6 +217,31 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
         cv.put(PublishedSurveyColumnEndDate, publishedSurvey.EndDate)
 
         val rowId = db.insert(PublishedSurveyTableName, null, cv)
+        db.close()
+        return rowId
+    }
+
+    fun addAnswer(answer: Answer): Long{
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
+
+        cv.put(AnswerColumnAnswerText, answer.AnswerText)
+
+        val rowId = db.insert(AnswerTableName, null, cv)
+        db.close()
+        return rowId
+    }
+
+    fun addStudentSurveyRes(studentSurveyRespond: StudentSurveyRespond): Long{
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
+
+        cv.put(StudentSurveyResColumnStudentId, studentSurveyRespond.StudentId)
+        cv.put(StudentSurveyResColumnQuestionId, studentSurveyRespond.QuestionId)
+        cv.put(StudentSurveyResColumnPublishedSurveyId, studentSurveyRespond.PublishedSurveyId)
+        cv.put(StudentSurveyResColumnAnwserId, studentSurveyRespond.AnswerId)
+
+        val rowId = db.insert(StudentSurveyResTableName, null, cv)
         db.close()
         return rowId
     }
@@ -380,4 +359,60 @@ class SurveyDataBase(context: Context) : SQLiteOpenHelper(context,DataBaseName,n
 
         return questionList
     }
+
+    fun getStudentSurveyResponds(publishedSurveyId: Int): ArrayList<StudentSurveyRespond>{
+        val respondList = ArrayList<StudentSurveyRespond>()
+        val db: SQLiteDatabase = this.readableDatabase
+        val sqlStatement = "SELECT * FROM $StudentSurveyResTableName WHERE $StudentSurveyResColumnPublishedSurveyId = $publishedSurveyId"
+
+        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+
+        if (cursor.moveToFirst())
+            do {
+                val id: Int = cursor.getInt(0)
+                val studentId: Int = cursor.getInt(1)
+                val publishedSurveyId: Int = cursor.getInt(2)
+                val questionId: Int = cursor.getInt(3)
+                val answerId: Int = cursor.getInt(4)
+
+
+                val respond = StudentSurveyRespond(id, studentId, publishedSurveyId, questionId, answerId)
+                respondList.add(respond)
+            } while (cursor.moveToNext())
+
+        cursor.close()
+        db.close()
+
+        return respondList
+    }
+
+    fun getQuestion(questionId: Int): Question{
+        var question = Question(-1, -1,"");
+        val db: SQLiteDatabase = this.readableDatabase
+        val cursor: Cursor = db.rawQuery("SELECT * FROM $QuestionTableName WHERE $QuestionColumnId = ?", arrayOf(questionId.toString()))
+        if(cursor.moveToFirst()){
+            val id = cursor.getInt(0)
+            val surveyId = cursor.getInt(1)
+            val title = cursor.getString(2)
+            question =  Question(id, surveyId, title)
+        }
+        cursor.close()
+        db.close()
+        return question
+    }
+
+    fun getAnswer(answerId: Int): Answer{
+        var answer = Answer(-1, "");
+        val db: SQLiteDatabase = this.readableDatabase
+        val cursor: Cursor = db.rawQuery("SELECT * FROM $AnswerTableName WHERE $AnswerColumnId = ?", arrayOf(answerId.toString()))
+        if(cursor.moveToFirst()){
+            val id = cursor.getInt(0)
+            val answerContent = cursor.getString(1)
+            answer =  Answer(id, answerContent)
+        }
+        cursor.close()
+        db.close()
+        return answer
+    }
 }
+

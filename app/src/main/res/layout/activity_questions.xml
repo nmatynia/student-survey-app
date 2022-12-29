@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionsActivity"
+    android:gravity="center_horizontal"
+    android:layout_marginHorizontal="30dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:gravity="center"
+        android:text="Question 1 of 3"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/questionContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="Question content"
+        android:textSize="18dp"
+        android:layout_marginBottom="30dp"/>
+
+
+    <RadioGroup
+        android:id="@+id/answerGroup"
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        >
+
+        <RadioButton
+            android:id="@+id/buttonStronglyAgree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Strongly Agree" />
+
+        <RadioButton
+            android:id="@+id/buttonAgree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agree"
+            android:textSize="18dp"
+            />
+
+        <RadioButton
+            android:textSize="18dp"
+            android:id="@+id/buttonNor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Neither Agree nor Disagree" />
+
+        <RadioButton
+            android:id="@+id/buttonDisagree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Disagree"
+            android:textSize="18dp"
+            />
+
+        <RadioButton
+            android:id="@+id/buttonStronglyDisagree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Strongly Disagree"
+            android:textSize="18dp"
+            />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonPrevious"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight=".50"
+            android:onClick="previous"
+            android:text="Previous" />
+
+        <Button
+            android:id="@+id/buttonNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight=".50"
+            android:onClick="next"
+            android:text="Next" />
+    </LinearLayout>
+
+
+</LinearLayout>
