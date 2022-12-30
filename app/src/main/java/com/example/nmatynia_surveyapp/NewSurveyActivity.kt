@@ -19,6 +19,13 @@ class NewSurveyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_survey)
+
+        //* This sets endDate to initially be tomorrow
+        val datePicker = findViewById<DatePicker>(R.id.pickerEndDate)
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, 1)
+        datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        //*
     }
 
     fun addNewQuestion(view: View) {
