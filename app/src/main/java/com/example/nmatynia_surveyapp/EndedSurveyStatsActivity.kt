@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.nmatynia_surveyapp.Model.*
 import kotlin.math.roundToInt
 
@@ -76,7 +77,13 @@ class EndedSurveyStatsActivity : AppCompatActivity() {
                 existingRow.total++
             }
         }
+
         val questionList: ArrayList<String> = surveyResponseTable.map {it.question} as ArrayList<String>
+        endedSurveyList?.setOnItemClickListener { parent, view, position, id ->
+            val questionToDisplay = questionList[position]
+
+            Toast.makeText(this,questionToDisplay, Toast.LENGTH_LONG).show()
+        }
         val stronglyDisagreeList: ArrayList<String> = surveyResponseTable.map {
             if (it.total == 0) {
                 "0%"

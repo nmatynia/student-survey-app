@@ -23,6 +23,9 @@
             android:gravity="center_vertical"
             android:text="Question"
             android:textStyle="bold"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="15sp" />
 
         <TextView
